@@ -1,0 +1,22 @@
+---
+- hosts: all
+  gather_facts: false
+  pre_tasks:
+    - name: From task
+      debug:
+        msg: We are doing a thing in a task
+      when: do_thing is defined and do_thing|bool == True
+
+    - name: From task
+      debug:
+        msg: We are NOT doing a thing in a task
+      when: do_thing is undefined or do_thing is defined and do_thing|bool == False
+
+    - name: Run role
+      import_role:
+        name: test
+      when: do_thing is defined and do_thing|bool == True
+
+- name: Import playbook
+  import_playbook: play.yml
+  when: do_thing is defined and do_thing|bool == True

@@ -1,0 +1,5 @@
+---
+# tasks file for test
+- name: From role
+  debug:
+    msg: We are doing a thing in a role
